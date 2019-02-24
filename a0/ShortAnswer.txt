@@ -1,0 +1,73 @@
+Enter your responses inline below and push this file to your private GitHub
+repository.
+
+
+1. Assume I plan to use the friend_overlap function above to quantify the
+similarity of two users. E.g., because 238 is larger than 1, I conclude that
+Jill Stein and Gary Johnson are more similar than Hillary Clinton and Donald
+Trump.
+
+How is this approach misleading? How might you fix it?
+
+The approach can misleading due to two reasons :
+--Following the same people is not necessarily a reflection of similarity. Candidates can follow people in whom they are not interested to stay updated with current information. Thus one candidate could be genuinely interested in a person he/she follows, while the other is simply following that person to stay updated on information. 
+
+--The value 236 is obtained for a corresponding large number of people followed ( 1642 and 3511), whereas the value 2 obtained for a small number of people followed ( 784 and 45). The comparison approach can be misleading if we extrapolate and calculate percentage of commonly followed people. At a point, the extrapolation will show that the candidates with a small number of friends will have a greater or same percentage of similarity than the ones with larger numbers. Thus, considering only the absolute values gives us a misleading inference.
+For ex : If Gary and Jill follow a total of 5,000 people and 500 people followed in common. This gives a similarity percentage of 10%. Whereas if Trump and Hillary follow  500 in total and have 50 followers in common, we get a similarity of 10%.
+Thus in the above example, inspite of having a fewer people in common, the similarity is same, which is why the approach in the question can be misleading.
+
+--To fix this, we can use the percentage based similarity measure as shown in the above example to get a better estimate.
+
+
+2. Looking at the output of your followed_by_hillary_and_donald function, why
+do you think this user is followed by both Hilary Clinton and Donald Trump,
+who are rivals? Do some web searches to see if you can find out more
+information.
+
+--Both the rivals follow 'WhiteHouse' since it is the most important political institution in the country and the place they want to be at after winning the elections. It can also be to stay updated on the latest information conveyed by the account.
+--'realDonaldTrump' follows the 'VP' since he is his running mate and a president and vice-president work closely together. 
+--'HillaryClinton' on the other hand follows the 'VP' since he is a person holding a seat of power in the White House and might tweet important information. Also, a little web search reveals that both of these people have been accused of using private emails for communication. No inference can be taken from this without further proof.
+
+
+3. There is a big difference in how many accounts each candidate follows (Gary
+Johnson follows over 3K accounts, while Donald Trump follows less than
+50). Why do you think this is? How might that affect our analysis?
+
+--Gary Johnson might have followed more accounts than Trump for a greater outreach in his campaign. On the other hand he might have been interested in those accounts and their content. Donald Trump might not have needed to follow as many accounts for a similar outreach or would have been interested in the content of only those accounts.
+--This will reduce the number of common friends between the two in our analysis as compared to other candidates who follow as many accounts as Gary Johnson. This can be seen in our graph visualisation where Donald Trump and Hillary Clinton have very few nodes connected to them as compared to the other two candidates.
+
+
+
+4. The follower graph we've collected is incomplete. To expand it, we would
+have to also collect the list of accounts followed by each of the
+friends. That is, for each user X that Donald Trump follows, we would have to
+also collect all the users that X follows. Assuming we again use the API call
+https://dev.twitter.com/rest/reference/get/friends/ids, how many requests will
+we have to make? Given how Twitter does rate limiting
+(https://dev.twitter.com/rest/public/rate-limiting), approximately how many
+minutes will it take to collect this data?
+
+CASE A : In this case we consider all the nodes (even the ones not shown in the graph to reduce clutter)
+
+--Requests/ 15 min window : 15 (Thus, we can assume 1 request/min)
+--Time to collect data for 4 candidates : 4 minutes (1 min/request)
+--Total Friends for all candidates : 5982
+--Time to collect data for candidate friends : 5982 minutes (1 min/request)
+--Total time required to collect data: 5982 minutes
+--No. Of windows required : 5982 / 15 = 398.8 which is 399 windows approximately.
+--Total time considering rate limit : 399 x 15 = 5985 minutes.
+--However we don't need to wait for the entire duration of the last window and we can ignore it, reducing the total time to 5970 minutes.
+
+--Also, we should consider the fact that there are common people followed between the 
+candidates. If we store the information of these common entities at the beginning, we need not repeatedly make requests for them for each candidate. The total common people followed are 273. So if we consider that these requests need to made only once, the time will reduce by 273 minutes approximately.
+Thus after considering the above statement, we can reduce the time taken to 5697 minutes.
+Again, we need not wait for the entire duration of the last window, as we can make 11 requests in the first minute itself.
+This gives a total time to 5686 minutes approximately.
+
+CASE B : In this case we consider only those nodes we have printed in our graph ( we ignore the the users not followed by 2 or more candidates.)
+
+--No of nodes : 269
+--Total requests : 265
+--Requests/ 15 min window : 15 ( Thus, we can assume 1 request/min)
+--Time to collect data : 265 minutes.
+--Again we can make the last 10 requests in the first minute itself, reducing the total time to 256 minutes approximately.

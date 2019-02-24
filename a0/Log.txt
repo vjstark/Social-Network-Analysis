@@ -1,0 +1,15 @@
+Established Twitter connection.
+Read screen names: ['DrJillStein', 'GovGaryJohnson', 'HillaryClinton', 'realDonaldTrump']
+found 4 users with screen_names ['DrJillStein', 'GovGaryJohnson', 'HillaryClinton', 'realDonaldTrump']
+Friends per candidate:
+DrJillStein 1642
+GovGaryJohnson 3509
+HillaryClinton 783
+realDonaldTrump 45
+Most common friends:
+[(18766459, 3), (19608297, 3), (701725963, 3), (822215673812119553, 3), (12, 2)]
+Friend Overlap:
+[('DrJillStein', 'GovGaryJohnson', 237), ('GovGaryJohnson', 'HillaryClinton', 17), ('GovGaryJohnson', 'realDonaldTrump', 12), ('DrJillStein', 'HillaryClinton', 5), ('HillaryClinton', 'realDonaldTrump', 2), ('DrJillStein', 'realDonaldTrump', 0)]
+User followed by Hillary and Donald: [!!REDACTED!!]
+graph has 269 nodes and 534 edges
+network drawn to network.png
