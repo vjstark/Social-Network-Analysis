@@ -1,17 +1,13 @@
 # coding: utf-8
 
-# # CS579: Assignment 1
 #
-# In this assignment, we'll implement community detection and link prediction algorithms using Facebook "like" data.
+# we'll implement community detection and link prediction algorithms using Facebook "like" data.
 #
 # The file `edges.txt.gz` indicates like relationships between facebook users. This was collected using snowball sampling: beginning with the user "Bill Gates", I crawled all the people he "likes", then, for each newly discovered user, I crawled all the people they liked.
 #
 # We'll cluster the resulting graph into communities, as well as recommend friends for Bill Gates.
 #
-# Complete the **15** methods below that are indicated by `TODO`. I've provided some sample output to help guide your implementation.
 
-
-# You should not use any imports not listed here:
 from collections import Counter, defaultdict, deque
 import copy
 from itertools import combinations
@@ -40,7 +36,7 @@ def bfs(graph, root, max_depth):
     This means that nodes greather than max_depth distance from the root will not
     appear in the result.
 
-    You may use these two classes to help with this implementation:
+      these two classes help with this implementation:
       https://docs.python.org/3.5/library/collections.html#collections.defaultdict
       https://docs.python.org/3.5/library/collections.html#collections.deque
 

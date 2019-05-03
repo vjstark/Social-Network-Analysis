@@ -1,7 +1,6 @@
 # coding: utf-8
 
 """
-    CS579: Assignment 0
     Collecting a political social network
     In this assignment, I've given you a list of Twitter accounts of 4
     U.S. presedential candidates from the previous election.
@@ -17,10 +16,8 @@
     installed [pip](http://pip.readthedocs.org/en/latest/installing.html), you can
     do this with `pip install networkx TwitterAPI`.
     OK, now you're ready to start collecting some data!
-    I've provided a partial implementation below. Your job is to complete the
-    code where indicated.  You need to modify the 10 methods indicated by
     #TODO.
-    Your output should match the sample provided in Log.txt.
+    output should match the sample provided in Log.txt.
     """
 
 # Imports you'll need.

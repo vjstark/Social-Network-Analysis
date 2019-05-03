@@ -1,0 +1,42 @@
+The project perfroms community detection for users tweeting on the recent Notre-Dame church fire as well as the bombings on a church in Sri Lanka. This is done to get a visualization of the number of users tweeting about the events using the corresponding hashtags and the number of users tweeting about both the issues.
+We then perform sentiment analysis on the tweets by classifying the tweets into three sentiments namely positive, negative and other. The tweets classified as positive are ones that indicate sympathy, horror towards the event or support for the victims of the events. The tweets classified as negative are the ones that question the support towards or the occurence of events, discuss conspiracy theories or are simply abusive in nature. General Facts and advertisements are classified as other tweets.
+The workings of each file are explained below.
+
+topics:
+This file consists of all the hashtags that we use to filter the tweets.
+The hashtage used to filter tweets for the Notre-Dame church fire are { #fire, #Notre-Dame, #NotreDame, #NotreDameCathedral, #NotreDameCathedralFire, #NotreDameFire, #parisfire, #prayingforparis } while the tweets used for the christ church bombings are {#Christchurch, #srilankaterrorattack, #ChristchurchAttack, #ChristchurchMosqueAttack}.
+
+collect.py:
+This is the first file we run to collect twitter data. It uses the list of hashtags in the 'topics' file to collect tweets. The collection is done using twitter api credentials. The method used for collection is tweepy's Stream Listener along with tinydb. The collected tweets are stored in a '{#hashtag}.json' file for each hashtag along with some details such as 'screen name','tweet id','user id', 'created at' and 'hashtags'. These details are collected since they can be used for clustering, community detection and sentiment analysis. The 'user id' and 'screen_name' are also saved in a seperate 'user_{#hashtag}.json' file. All these json files are stored in a folder 'twitter_data' which is created by the script itself. Note that the data collected is unlabelled and the labelled 'pos', 'neg' and 'other' are annotated manually after collection. To speed up data collection multithreading has been used.
+We collect 17819 tweets for 14340 users
+
+cluster.py:
+The data is loaded from the files in 'twitter_data' folder using tinydb and two separate dbs for users and tweets are created. The function then clusters the users based on the hashtags they use and plots a graph for the same using networkx and matplotlib which is then saved to a file named 'cluster.jpg'. Since the total tweets collected approximately 17,000 only a small sample of these tweets have been used for better visualisation. The sample size can be altered by changing the value of the variable 'sample_size' in the script.  The script then uses Girvan Newman algorithm from networkx to detect communities. The value of k in used by the Girvan Newman is optimized such that we stop changing k when there is only one user left in a community. This is done to avoid overfitting which results in each user being assigned to his/her own community. The script then collects the number of messages collected, number of users, number of communities detected and the average number of users/community. These values are dumped into a 'data_from_clusterpy' pickle file which is then used to create 'summary.txt' in 'summarize.py'. We detect 10 communities for the given data.
+
+classify.py:
+This script performs supervised learning for the collected data and gives us a sentiment analysis for the tweets. The annotated data saved to training.json is split into training and test data. The model is then trained on the training data and tested on the remaining data. It uses the 'training.json' file to perform classification. To do so the data needs to be pre-processed. The steps involved in cleaning are removing special characters, punctuations, hyperlinks etcetera since they have little or no contribution to sentiment. The tweets are then tokenized and depending on the application the internal punctuations can be retained or removed. The tokens are lemmatized into their base form to avoid words being repeated. Since the data consists of tweets in different languages we split our annotated data into training and test sets using the split_data function. The training is done using SVM from scikit. We then use this trained model to predict labels for the test data and store them in a predictions variable. The number of instances for each label and the examples for each label are then found and dumped in a 'data_from_classifypy' pickle file. We use 300 samples (100 for each label) to train our data and 200 to test our data
+
+summarize.py:
+This file loads the pickle files 'data_from_clusterpy' and 'data_from_classifypy' and writes the results to 'summary.txt'
+
+ANALYSIS:
+The community detection algorithm detects almost as many communities as the number of hashtags used. Although this is useful, the hash-tags for a single topic can be grouped further to get communities based only on the topics in question (Notre-Dame Fire and Church Bombings in our case).
+
+
+Some issues noticed can be listed as follows:
+1. The data has tweets in multiple languages. The other languages may not be classified as accurately as for english.
+2. The data has been annotated manually and the samples for each label are very small compared to total size of the data. The size of training samples is dictated by the label with the least samples.
+3. There are a lot of retweets containing the same text which reduce the sample size further.
+
+The issues can be solved using the following approaches:
+1. The tweets can be filtered for collecting english tweets only. However, this is a disadvantage in tweets dictated by geography as in our case.
+2. Re-tweets can be filtered while collecting the data or removed later.
+3. A larger chunk of the data can be annotated manually, however this is time consuming and not entirely fool-proof.
+
+
+
+
+
+
+
+

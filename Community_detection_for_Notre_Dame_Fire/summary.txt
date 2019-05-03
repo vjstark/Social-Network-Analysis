@@ -1,0 +1,24 @@
+Number of users collected: 14340
+Number of messages collected: 17819
+Number of communities discovered: 10
+Average number of users per community: 1434.0
+ 
+Instance count for each label :
+ 
+--pos : instance count for positive labels, --neg : instance count for positive labels
+--other : instance count for tweets that have neither positive nor negative sentiment.
+ 
+pos : 6
+neg : 197
+other : 50
+ 
+Examples for each class :
+ 
+--pos : example for positive labels, --neg : example for positive label
+--other: example for tweet that has neither negative nor positive sentiment
+ 
+pos : rt @ ginalee74748805     parisfire 
+neg : rt   the  near russian propaganda site 
+spreads a fake photo about hatred for 
+to go ahead  
+other : rt         
