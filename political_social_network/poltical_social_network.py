@@ -30,10 +30,10 @@ import operator
 from TwitterAPI import TwitterAPI
 from itertools import combinations
 
-consumer_key = 'E6HbvRRYgnVZZi639RQ1Htn2i'
-consumer_secret = 'oYLDnlA6221zEY1GQhKBSZ3mM4K9cxDg05etMNaMTrYVfsqQH1'
-access_token = '1052726624666484741-DnqKfch9vvvyFrFnxvWHuPzhbtjUtY'
-access_token_secret = 'LqSpzd6bp2PbRh9t1aCyJMpJEPjS2RYvYJ7TQon9YWxmn'
+consumer_key = '' #insert API keys here
+consumer_secret = '' #insert API keys here
+access_token = '' #insert API keys here
+access_token_secret = '' #insert API keys here
 
 
 # This method is done for you.

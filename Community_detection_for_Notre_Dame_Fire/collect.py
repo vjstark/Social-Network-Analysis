@@ -59,10 +59,10 @@ class listener(StreamListener):
         self.tw.close()
         self.user_db.close()
 
-consumer_key = 'YsQIbcac47zv2MG5wsWLY0m6D'
-consumer_secret = 'A4nZCnnvkbJ7y8qdYWbDbgoyWu3pVzUSeLzoPRHBDnZST5UtCd'
-access_token = '1119695253848694785-71ZMr1sswTuxIwavBIcxHGrptOiDSK'
-access_token_secret = 'pptINGF1pevC7k3mkghaZJIewWmz9ceLXV1tB11GtdNbN'
+consumer_key = '' #insert API keys here
+consumer_secret = '' #insert API keys here
+access_token = '' #insert API keys here
+access_token_secret = '' #insert API keys here
 
 auth = OAuthHandler(consumer_key, consumer_secret)
 auth.set_access_token(access_token, access_token_secret)
